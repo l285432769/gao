@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电视直播频道列表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: #1a73e8;
+            margin: 30px 0 20px;
+            border-bottom: 2px solid #1a73e8;
+            padding-bottom: 5px;
+        }
+
+        .channel-category {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .category-header {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-header:hover {
+            background: #e9f2fd;
+        }
+
+        .category-content {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .channel-item {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+
+        .channel-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .channel-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .channel-link {
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .category-header.active {
+            background: #1a73e8;
+            color: white;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .category-content.active {
+            display: grid;
+        }
+
+        .category-content.inactive {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .category-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">电视直播频道列表</h1>
+
+        <!-- CCTV分类 -->
+        <div class="channel-category">
+            <div class="category-header" onclick="toggleCategory(this)">
+                CCTV频道 <span>&#9660;</span>
+            </div>
+            <div class="category-content inactive">
+                <!-- 这里插入CCTV频道列表 -->
+                <div class="channel-item">
+                    <div class="channel-name">CCTV1</div>
+                    <a href="http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226016/index.m3u8" class="channel-link">播放地址</a>
+                </div>
+                <!-- 省略其他CCTV频道代码，可按此格式批量添加 -->
+            </div>
+        </div>
+
+        <!-- 卫视分类 -->
+        <div class="channel-category">
+            <div class="category-header" onclick="toggleCategory(this)">
+                卫视频道 <span>&#9660;</span>
+            </div>
+            <div class="category-content inactive">
+                <!-- 这里插入卫视频道列表 -->
+                <div class="channel-item">
+                    <div class="channel-name">北京卫视</div>
+                    <a href="http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225728/index.m3u8" class="channel-link">播放地址</a>
+                </div>
+                <!-- 省略其他卫视频道代码，可按此格式批量添加 -->
+            </div>
+        </div>
+
+        <!-- 精品分类 -->
+        <div class="channel-category">
+            <div class="category-header" onclick="toggleCategory(this)">
+                精品频道 <span>&#9660;</span>
+            </div>
+            <div class="category-content inactive">
+                <!-- 这里插入精品频道列表 -->
+                <div class="channel-item">
+                    <div class="channel-name">黑莓电影</div>
+                    <a href="http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225743/index.m3u8" class="channel-link">播放地址</a>
+                </div>
+                <!-- 省略其他精品频道代码，可按此格式批量添加 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCategory(header) {
+            const content = header.nextElementSibling;
+            content.classList.toggle('inactive');
+            header.classList.toggle('active');
+            
+            // 切换箭头方向
+            const icon = header.querySelector('span');
+            icon.textContent = content.classList.contains('inactive') ? '&#9660;' : '&#9650;';
+        }
+    </script>
+</body>
+</html>
